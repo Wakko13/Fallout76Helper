@@ -1,0 +1,96 @@
+---
+title: "How CAMP budget and blueprints actually work"
+category: camp
+summary: "The build budget is a single fixed meter (community-nicknamed 'Flamingo Units') driven by each item's complexity, not your level; blueprints bundle a build for save/reload/sharing; and you get 2 free CAMP slots (up to 10 with Atoms) but only one active on the map at a time."
+tags: [camp, budget, blueprints, building, camp-slots]
+verified: 2026-08-27
+sources:
+  - label: "Bethesda Support — How does the C.A.M.P. work in Fallout 76?"
+    url: "https://help.bethesda.net/app/answers/detail/a_id/44208/~/how-does-the-c.a.m.p.-work-in-fallout-76"
+  - label: "Bethesda Support — C.A.M.P. Shelters"
+    url: "https://help.bethesda.net/app/answers/detail/a_id/52346/~/c.a.m.p.-shelters---fallout-76"
+  - label: "Bethesda Support — C.A.M.P. Slots"
+    url: "https://help.bethesda.net/app/answers/detail/a_id/53127/~/c.a.m.p.-slots---fallout-76"
+  - label: "The Fallout Wiki — Community: Flamingo Units"
+    url: "https://fallout.wiki/wiki/Community:Flamingo_Units"
+  - label: "GameRevolution — Fallout 76 Camp Budget Problem: How Do I Get More Budget?"
+    url: "https://www.gamerevolution.com/guides/458657-fallout-76-camp-budget-problem"
+  - label: "GosuNoob — Fallout 76 How to Save Blueprint & Move Camp"
+    url: "https://www.gosunoob.com/fallout-76/fo76-how-to-save-blueprint-move-camp/"
+  - label: "TheGamer — How To Set Up And Relocate Your Camp In Fallout 76"
+    url: "https://www.thegamer.com/fallout-76-camp-make-move-complete-guide/"
+---
+
+For practical pitfalls (what eats budget fastest in practice, blueprint footprint tricks, placement quirks), see
+[CAMP building gotchas](/faq/camp-building-gotchas) — this entry covers the underlying mechanics instead.
+
+## Budget: how it's actually calculated
+
+Your CAMP has a single build meter shown as a percentage/bar in Build Mode. It is **fixed** — there's no known
+way to permanently increase it (leveling up does not expand it, despite some claims floating around; treat
+those as unconfirmed). Once the meter fills, you can't place more items even if you have the raw materials for
+them, and you must scrap something first.
+
+- Every placeable object has a **budget cost** driven mainly by its complexity — roughly its polygon count and
+  how much is animated/interactive. A flat wall or floor piece costs very little; a turret, generator, crafting
+  bench, or animated decoration costs a lot more for the same "one item" placed.
+- The community-run **Flamingo Unit** system (named after the Lawn Flamingo decoration, which costs almost
+  exactly 1 unit) is the closest thing to a documented cost table, since Bethesda doesn't publish exact numbers.
+  Under that system: a CAMP tops out around **500 units**, a claimed Workshop around **1,500 units**, and
+  Shelters have their own separate budget entirely (see below). Most basic structural pieces cost around 1 unit;
+  a wire connection costs a fraction of a unit (~0.25); turrets, generators, and displays cost several times
+  that.
+- **Items in your Storage tab still count against budget**, whether or not they're actually placed in the
+  world. Blueprints you've saved also count against budget while stored.
+- There is no separate player-facing "complexity" meter distinct from budget — complexity is the *input* that
+  determines how much budget an individual item costs, not a second pool you manage independently. If you see
+  the term used elsewhere, it almost always means this same underlying budget cost.
+
+## Shelters have their own separate budget
+
+CAMP Shelters (the instanced Vault-style interior spaces: Utility Room, Lobby, Atrium) are not part of your main
+CAMP's budget at all — each shelter type has its own build budget, generally larger than your main CAMP's. You
+can own one of each shelter type at a time, build multiple entrances to the same shelter, and shelter interiors
+persist independently even if you move your CAMP or destroy the entrance.
+
+## Blueprint (aka camp plan)
+
+A blueprint is a saved snapshot of some or all of your build that you can place again later, including on a
+different plot or after a CAMP move:
+
+1. In Build Mode, switch to the Blueprint/Modify tool (TAB on PC) and hold the select key (E) to start tagging
+   items.
+2. Select everything you want included — the UI shows a running "blueprint budget" as you go.
+3. Confirm (R) to save it as a blueprint.
+
+Two things to know about placing one back down:
+
+- Blueprints save to your build menu's **Blueprint** category. Placing from there **re-crafts every item from
+  raw materials** — expensive if the blueprint is large.
+- When you use **Move CAMP**, the game automatically bundles your current build into the **Stored** category
+  instead (not Blueprint) — placing from Stored uses the copies you already built, at no extra material cost,
+  but is pickier about needing matching terrain.
+
+There's no official published cap on how many blueprints you can save; in practice the limiting factor is that
+saved blueprints count toward your CAMP budget while stored, so a handful of large ones can eat your budget
+before you've placed anything.
+
+## Multiple CAMP slots and moving
+
+- Every character gets **2 free CAMP slots** by default (your original CAMP plus one more). Up to **8
+  additional slots** (10 total) can be purchased from the Atomic Shop.
+- Only **one CAMP can be active/placed in the world at a time**, even with multiple slots owned — switch which
+  one is active from the Map or the CAMP Slots menu ("Activate CAMP"), and the others sit dormant until you
+  switch back.
+- **Moving your CAMP is not free** — the Pip-Boy "Move" option charges a caps fee that scales with character
+  level (roughly in the 15-40+ caps range at time of writing), separate from any material cost of rebuilding.
+- If someone else is occupying your saved CAMP location when you place it (e.g. after a server switch), the
+  game notifies you and lets you place elsewhere for free rather than forcing a paid move.
+
+## Uncertain / worth double-checking
+
+Exact Flamingo Unit costs and the 500/1,500-unit budget ceilings come from community spreadsheets, not an
+official Bethesda number — treat them as "the right order of magnitude." The caps cost to move a CAMP scaling
+with level is consistently reported by players but isn't in official documentation either. Blueprint slot
+limits, if any exist, aren't documented anywhere found — the practical constraint is budget consumption, not a
+hard count.
