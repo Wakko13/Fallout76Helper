@@ -14,7 +14,10 @@ const referenceCount = (await getCollection('reference')).length;
 		the same question never has to be re-researched twice.
 	</p>
 
-	<Search className="pagefind-ui" searchboxOptions={{ placeholder: 'Search everything…' }} />
+	<Search
+		className="pagefind-ui"
+		searchboxOptions={{ placeholder: 'Search everything…', 'show-sub-results': true }}
+	/>
 
 	<div class="tag-list" style="margin-top:1.5rem">
 		<a class="tag" href={`${import.meta.env.BASE_URL}faq/`}>{faqCount} FAQ answers</a>
