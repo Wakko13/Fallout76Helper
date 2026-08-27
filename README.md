@@ -25,6 +25,12 @@ after a game update, not everything else.
 Copy an existing `.mdx` file in the relevant collection, fill in frontmatter, write
 the answer, cite sources. File name becomes the URL slug.
 
+Pagefind search matches literal text on the page — it won't stem or map spelling
+variants (e.g. a page saying "aluminum" won't surface for someone searching
+"aluminium"). When a term has a common alternate spelling/name, just mention it
+inline once (a heading like `## Aluminum (aluminium)` is enough) so the word
+actually appears in the indexed text.
+
 ## Commands
 
 | Command           | Action                                                     |
@@ -45,6 +51,7 @@ and `base` accordingly) — update those if the repo is renamed or moved.
 
 ## Status
 
-Scaffold stage: structure, schemas, search, and deploy pipeline are wired up. The
-FAQ and reference entries currently in the repo are **format examples, not
-researched answers** — replace them as real questions get answered.
+Structure, schemas, search, and deploy pipeline are wired up, and content is real
+(sourced/dated, not placeholders) as of the second content batch. Still early —
+more topics get added incrementally as questions come up or as general sweeps
+cover more of the game.
