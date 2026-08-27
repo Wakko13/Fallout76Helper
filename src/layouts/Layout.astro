@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} · Fallout 76 Helper</title>
+	</head>
+	<body>
+		<header class="site-header">
+			<a class="brand" href={import.meta.env.BASE_URL}>Fallout 76 Helper</a>
+			<nav>
+				<a href={`${import.meta.env.BASE_URL}faq/`}>FAQ</a>
+				<a href={`${import.meta.env.BASE_URL}reference/`}>Reference</a>
+			</nav>
+		</header>
+		<main>
+			<slot />
+		</main>
+		<footer class="site-footer">
+			<p>Personal knowledge base — answers get re-verified, not re-asked.</p>
+		</footer>
+	</body>
+</html>

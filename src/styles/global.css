@@ -1,0 +1,124 @@
+:root {
+	color-scheme: light dark;
+	--bg: light-dark(#f7f5f0, #14120f);
+	--fg: light-dark(#1c1a17, #eee9df);
+	--muted: light-dark(#6b6558, #a39d8e);
+	--accent: #c9722f;
+	--card: light-dark(#ffffff, #1f1c17);
+	--border: light-dark(#e4ddcf, #322d25);
+	--radius: 8px;
+	font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--fg);
+	line-height: 1.55;
+}
+
+.site-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1rem 1.5rem;
+	border-bottom: 1px solid var(--border);
+}
+
+.site-header .brand {
+	font-weight: 700;
+	color: var(--fg);
+	text-decoration: none;
+}
+
+.site-header nav a {
+	margin-left: 1.25rem;
+	color: var(--muted);
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.site-header nav a:hover {
+	color: var(--accent);
+}
+
+main {
+	max-width: 860px;
+	margin: 0 auto;
+	padding: 2rem 1.5rem 4rem;
+}
+
+.site-footer {
+	text-align: center;
+	color: var(--muted);
+	font-size: 0.85rem;
+	padding: 2rem 1.5rem;
+}
+
+a {
+	color: var(--accent);
+}
+
+.tag-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	margin: 0.5rem 0;
+}
+
+.tag {
+	background: var(--card);
+	border: 1px solid var(--border);
+	border-radius: 999px;
+	padding: 0.15rem 0.65rem;
+	font-size: 0.78rem;
+	color: var(--muted);
+}
+
+.entry-card {
+	display: block;
+	background: var(--card);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	padding: 1rem 1.25rem;
+	margin-bottom: 0.75rem;
+	text-decoration: none;
+	color: var(--fg);
+}
+
+.entry-card:hover {
+	border-color: var(--accent);
+}
+
+.entry-card h3 {
+	margin: 0 0 0.35rem;
+}
+
+.entry-card p {
+	margin: 0;
+	color: var(--muted);
+	font-size: 0.92rem;
+}
+
+.meta {
+	color: var(--muted);
+	font-size: 0.85rem;
+}
+
+.category-group h2 {
+	margin-top: 2rem;
+	text-transform: capitalize;
+	border-bottom: 1px solid var(--border);
+	padding-bottom: 0.35rem;
+}
+
+.sources {
+	margin-top: 2rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--border);
+	font-size: 0.9rem;
+}

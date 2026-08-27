@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Search from 'astro-pagefind/components/Search.astro';
+import { getCollection } from 'astro:content';
+
+const faqCount = (await getCollection('faq')).length;
+const referenceCount = (await getCollection('reference')).length;
+---
+
+<Layout title="Home">
+	<h1>Fallout 76 Helper</h1>
+	<p>
+		A personal, searchable knowledge base for Fallout 76 questions — built so
+		the same question never has to be re-researched twice.
+	</p>
+
+	<Search className="pagefind-ui" searchboxOptions={{ placeholder: 'Search everything…' }} />
+
+	<div class="tag-list" style="margin-top:1.5rem">
+		<a class="tag" href={`${import.meta.env.BASE_URL}faq/`}>{faqCount} FAQ answers</a>
+		<a class="tag" href={`${import.meta.env.BASE_URL}reference/`}>{referenceCount} reference entries</a>
+	</div>
+</Layout>

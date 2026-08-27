@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const entries = await getCollection('reference');
+const byCategory = new Map<string, typeof entries>();
+for (const entry of entries) {
+	const group = byCategory.get(entry.data.category) ?? [];
+	group.push(entry);
+	byCategory.set(entry.data.category, group);
+}
+---
+
+<Layout title="Reference">
+	<h1>Reference</h1>
+	<p class="meta">Game mechanics and data that don't change every session.</p>
+
+	{[...byCategory.entries()].map(([category, items]) => (
+		<div class="category-group">
+			<h2>{category.replace('-', ' ')}</h2>
+			{items.map((entry) => (
+				<a class="entry-card" href={`${import.meta.env.BASE_URL}reference/${entry.id}/`}>
+					<h3>{entry.data.title}</h3>
+					{entry.data.summary && <p>{entry.data.summary}</p>}
+					<p class="meta">Verified {entry.data.verified.toDateString()}</p>
+				</a>
+			))}
+		</div>
+	))}
+</Layout>

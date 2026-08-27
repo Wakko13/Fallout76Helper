@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const entries = (await getCollection('faq')).sort(
+	(a, b) => b.data.verified.valueOf() - a.data.verified.valueOf(),
+);
+---
+
+<Layout title="FAQ">
+	<h1>FAQ</h1>
+	<p class="meta">Answered once, so nobody has to re-ask it.</p>
+
+	{entries.map((entry) => (
+		<a class="entry-card" href={`${import.meta.env.BASE_URL}faq/${entry.id}/`}>
+			<h3>{entry.data.title}</h3>
+			{entry.data.summary && <p>{entry.data.summary}</p>}
+			<div class="tag-list">
+				{entry.data.tags.map((tag: string) => <span class="tag">{tag}</span>)}
+			</div>
+			<p class="meta">Verified {entry.data.verified.toDateString()}</p>
+		</a>
+	))}
+</Layout>
