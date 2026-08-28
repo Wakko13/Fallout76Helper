@@ -15,7 +15,8 @@
     "@astrojs/mdx": "^7.0.8",
     "astro": "^7.2.8",
     "astro-pagefind": "^2.0.1",
-    "pagefind": "^1.5.2"
+    "pagefind": "^1.5.2",
+    "rehype-external-links": "^3.0.0"
   },
   "allowScripts": {
     "esbuild": true
