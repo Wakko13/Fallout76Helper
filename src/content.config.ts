@@ -31,6 +31,7 @@ const referenceCategories = z.enum([
   'bosses',
   'mutations',
   'creatures',
+  'food',
 ]);
 
 const reference = defineCollection({
