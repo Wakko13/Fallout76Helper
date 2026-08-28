@@ -54,8 +54,11 @@ body {
 }
 
 .site-header-search {
-	margin-top: 0.75rem;
-	max-width: 480px;
+	margin: 0.75rem auto 0;
+	max-width: 560px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .site-header-search .pagefind-ui {
@@ -66,6 +69,7 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
+	justify-content: center;
 	gap: 0.4rem;
 	margin-top: 0.5rem;
 }
