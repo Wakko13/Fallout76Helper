@@ -30,6 +30,7 @@ const referenceCategories = z.enum([
   'vendors',
   'bosses',
   'mutations',
+  'creatures',
 ]);
 
 const reference = defineCollection({
