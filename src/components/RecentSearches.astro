@@ -1,0 +1,106 @@
+---
+interface Props {
+  instance?: string;
+}
+
+const { instance = 'site-search' } = Astro.props;
+---
+
+<div class="recent-searches" data-instance={instance} hidden>
+  <span class="recent-searches-label">Recent:</span>
+  <div class="recent-searches-chips"></div>
+</div>
+
+<script>
+  import { getInstanceManager } from '@pagefind/component-ui';
+
+  const STORAGE_KEY = 'f76helper:recentSearches';
+  const MAX_RECENT = 6;
+  const SAVE_DEBOUNCE_MS = 900;
+
+  function loadRecent(): string[] {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed.filter((t) => typeof t === 'string') : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveRecent(terms: string[]) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(terms));
+    } catch {
+      // Storage unavailable (private browsing, quota, etc.) — recent searches just won't persist.
+    }
+  }
+
+  function addRecent(term: string) {
+    const trimmed = term.trim();
+    if (!trimmed) return;
+    const existing = loadRecent().filter((t) => t.toLowerCase() !== trimmed.toLowerCase());
+    existing.unshift(trimmed);
+    saveRecent(existing.slice(0, MAX_RECENT));
+  }
+
+  function initRecentSearches(container: HTMLElement) {
+    const instanceName = container.dataset.instance || 'site-search';
+    const chipsEl = container.querySelector<HTMLDivElement>('.recent-searches-chips');
+    if (!chipsEl) return;
+
+    function render() {
+      const terms = loadRecent();
+      if (terms.length === 0) {
+        container.hidden = true;
+        return;
+      }
+      container.hidden = false;
+      chipsEl!.innerHTML = '';
+      for (const term of terms) {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'recent-search-chip';
+        chip.textContent = term;
+        chip.addEventListener('click', () => {
+          try {
+            getInstanceManager().getInstance(instanceName)?.triggerSearch(term);
+          } catch {
+            // Instance not ready yet — clicking again after the page settles will work.
+          }
+        });
+        chipsEl!.appendChild(chip);
+      }
+    }
+
+    render();
+
+    let saveTimer: ReturnType<typeof setTimeout> | undefined;
+    let attempts = 0;
+    const maxAttempts = 50;
+
+    function trySubscribe() {
+      const inst = getInstanceManager().getInstance(instanceName);
+      if (!inst) {
+        attempts += 1;
+        if (attempts < maxAttempts) setTimeout(trySubscribe, 100);
+        return;
+      }
+      inst.on(
+        'search',
+        (term: string) => {
+          if (saveTimer) clearTimeout(saveTimer);
+          saveTimer = setTimeout(() => {
+            addRecent(term);
+            render();
+          }, SAVE_DEBOUNCE_MS);
+        },
+        container,
+      );
+    }
+
+    trySubscribe();
+  }
+
+  document.querySelectorAll<HTMLElement>('.recent-searches').forEach(initRecentSearches);
+</script>

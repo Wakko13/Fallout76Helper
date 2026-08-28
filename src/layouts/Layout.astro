@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import Search from 'astro-pagefind/components/Search.astro';
+import RecentSearches from '../components/RecentSearches.astro';
 
 interface Props {
   title: string;
@@ -17,11 +19,21 @@ const { title } = Astro.props;
 	</head>
 	<body>
 		<header class="site-header">
-			<a class="brand" href={import.meta.env.BASE_URL}>Fallout 76 Helper</a>
-			<nav>
-				<a href={`${import.meta.env.BASE_URL}faq/`}>FAQ</a>
-				<a href={`${import.meta.env.BASE_URL}reference/`}>Reference</a>
-			</nav>
+			<div class="site-header-top">
+				<a class="brand" href={import.meta.env.BASE_URL}>Fallout 76 Helper</a>
+				<nav>
+					<a href={`${import.meta.env.BASE_URL}faq/`}>FAQ</a>
+					<a href={`${import.meta.env.BASE_URL}reference/`}>Reference</a>
+				</nav>
+			</div>
+			<div class="site-header-search">
+				<Search
+					instance="site-search"
+					className="pagefind-ui"
+					searchboxOptions={{ placeholder: 'Search everything…', 'show-sub-results': true }}
+				/>
+				<RecentSearches instance="site-search" />
+			</div>
 		</header>
 		<main>
 			<slot />

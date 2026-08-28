@@ -22,11 +22,18 @@ body {
 }
 
 .site-header {
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: var(--bg);
+	padding: 1rem 1.5rem;
+	border-bottom: 1px solid var(--border);
+}
+
+.site-header-top {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 1rem 1.5rem;
-	border-bottom: 1px solid var(--border);
 }
 
 .site-header .brand {
@@ -44,6 +51,50 @@ body {
 
 .site-header nav a:hover {
 	color: var(--accent);
+}
+
+.site-header-search {
+	margin-top: 0.75rem;
+	max-width: 480px;
+}
+
+.site-header-search .pagefind-ui {
+	width: 100%;
+}
+
+.recent-searches {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.4rem;
+	margin-top: 0.5rem;
+}
+
+.recent-searches-label {
+	color: var(--muted);
+	font-size: 0.78rem;
+}
+
+.recent-searches-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem;
+}
+
+.recent-search-chip {
+	background: var(--card);
+	border: 1px solid var(--border);
+	border-radius: 999px;
+	padding: 0.15rem 0.65rem;
+	font-size: 0.78rem;
+	color: var(--muted);
+	cursor: pointer;
+	font-family: inherit;
+}
+
+.recent-search-chip:hover {
+	border-color: var(--accent);
+	color: var(--fg);
 }
 
 main {
