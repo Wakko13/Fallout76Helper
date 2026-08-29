@@ -107,6 +107,20 @@ main {
 	padding: 2rem 1.5rem 4rem;
 }
 
+main.main-wide {
+	max-width: 1400px;
+}
+
+.map-frame {
+	display: block;
+	width: 100%;
+	height: 75vh;
+	min-height: 500px;
+	margin-top: 1rem;
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+}
+
 .site-footer {
 	text-align: center;
 	color: var(--muted);
