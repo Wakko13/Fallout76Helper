@@ -35,6 +35,7 @@ const referenceCategories = z.enum([
   'weapons',
   'armor',
   'quests',
+  'mods',
 ]);
 
 const reference = defineCollection({
