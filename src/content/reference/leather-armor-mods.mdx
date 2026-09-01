@@ -1,0 +1,99 @@
+---
+title: "Leather Armor mod options"
+category: mods
+summary: "Weight-class, material/resistance, and misc mod options for Leather Armor (chest piece) — Boiled/Girded/Treated/Studded/Shadowed Leather tiers plus the Pocketed-family misc slot, with what's actually documented on reachable sources and what isn't."
+tags: [leather-armor, mods, armor, resistance, pocketed]
+verified: 2026-08-27
+sources:
+  - label: "Nukes & Dragons — Leather Chest Piece"
+    url: "https://nukesdragons.com/fallout-76/db/armor/leather-chest-piece"
+  - label: "Fextralife Fallout 76 Wiki — Armor Mods"
+    url: "https://fallout76.wiki.fextralife.com/Armor+Mods"
+  - label: "Fextralife Fallout 76 Wiki — Armorer (perk)"
+    url: "https://fallout76.wiki.fextralife.com/Armorer"
+  - label: "Fextralife Fallout 76 Wiki — Leather Chest Piece (per-item page, thin)"
+    url: "https://fallout76.wiki.fextralife.com/Leather+Chest+Piece"
+---
+
+For how the armor mod slot system works in general (material tiers, the single misc slot, underarmor
+linings being separate), see [Weapon and armor mod basics](../../faq/weapon-and-armor-mod-basics/). For
+where Leather Armor sits relative to Metal/Combat/Robot/etc., see
+[Light and combat armor sets](../light-and-combat-armor-sets/).
+
+Data below is for the **chest piece**; arm/leg/torso pieces use the same mod names but the underlying
+resistance/weight numbers scale down for limb slots (smaller base armor value). No crafting-material or
+perk-gate table for Leather Armor mods was found on any reachable source except the one row noted below —
+see the Uncertain section.
+
+## Weight class
+
+A separate slot picks the piece's overall weight/protection class before any material or misc mod is
+applied.
+
+| Mod | Effect | Perk required | Materials |
+| --- | --- | --- | --- |
+| Light (standard) | Baseline weight and resistance | — | Not documented on reachable sources |
+| Medium (Sturdy) | Weight +40%, all resistances +30% | Not documented | Not documented on reachable sources |
+| Heavy | Weight +65%, all resistances +65% | Not documented | Not documented on reachable sources |
+
+## Material/Resistance mods
+
+Percentages are relative bonuses over the piece's base resistance at its current weight class, per
+Nukes & Dragons. Tier/unlock order (which is known by default vs. learned by scrapping) comes from
+separate wiki summaries and could not be cross-verified against an official patch note.
+
+| Mod | Effect | Perk required | Materials |
+| --- | --- | --- | --- |
+| Standard | No bonus | — | — |
+| Boiled Leather | Physical Resistance +35%, Weight +10%. Known by default — no plan needed. | — | Chest: 1x Adhesive, 2x Cloth, 3x Leather |
+| Girded Leather | All resistances +13%, Weight +15%. Reported as learned by scrapping leather armor (low % chance). | Not documented | Not documented on reachable sources |
+| Treated Leather | Most resistances +15%, Poison Resistance +25%, Weight +20%. Reported as scrap-learned. | Not documented | Not documented on reachable sources |
+| Studded Leather | Physical Resistance +65%, Weight +30%. Reported as scrap-learned. | Not documented | Not documented on reachable sources |
+| Shadowed Leather | Stealth in Shadows +0.05. Obtained from its own plan rather than the scrap-tier progression. | Not documented | Not documented on reachable sources |
+
+## Misc mod (single slot)
+
+Only one of these can be active at a time — this is the "misc mod slot" described in
+[Weapon and armor mod basics](../../faq/weapon-and-armor-mod-basics/), separate from the material mod above
+and from underarmor linings.
+
+| Mod | Effect | Perk required | Materials |
+| --- | --- | --- | --- |
+| Pocketed | Carry Weight +10 | Not documented | Reported elsewhere (not confirmed set-specific): ~1-2x Adhesive, 2x Cloth, 2x Leather |
+| Deep Pocketed | Carry Weight +20 (torso) / +10 (limb) | Historically Armorer rank 1; current gating unclear | Not documented on reachable sources |
+| Lighter Build | Action Points +10 | Not documented | Not documented on reachable sources |
+| Ultra-Light Build | Action Points +20 | Historically Armorer rank 1; current gating unclear | Not documented on reachable sources |
+| Padded | Reduce incoming explosive damage 15% | Not documented | Not documented on reachable sources |
+| Dense | Reduce incoming explosive damage 30% | Historically Armorer rank 1; current gating unclear | Not documented on reachable sources |
+| Pneumatic | Reduce incoming stagger 25% | Not documented | Not documented on reachable sources |
+| Asbestos Lining | Fire-resistance oriented; Weight +15% | Not documented | Not documented on reachable sources |
+| Lead Lined | Radiation-resistance oriented; Weight +20% | Not documented | Not documented on reachable sources |
+| BioCommMesh | Chem Duration +0.5 | Not documented | Not documented on reachable sources |
+
+## Uncertain / worth double-checking
+
+This is a genuinely thin dataset compared to the weapon mod waves. Specific findings:
+
+- **Fextralife's per-item page for the Leather Chest Piece has no mod table at all** — just base stats and
+  "??" placeholders for several fields. The material/misc mod effects above come from Nukes & Dragons
+  (a build-planner site, not a wiki) instead, cross-checked loosely against wiki summaries surfaced via
+  search.
+- **Crafting materials are almost entirely undocumented on any source this session could actually reach.**
+  fallout.fandom.com and fallout.wiki both returned HTTP errors (402/403) on every armor-mod page attempted,
+  including the general "Fallout 76 armor mods" page and individual mod pages like "Deep pocketed" — this
+  looks like a systematic block against this fetch tool rather than a per-page issue, not something a
+  different query would fix. The Boiled Leather chest-piece materials (1x Adhesive, 2x Cloth, 3x Leather)
+  came through via search-engine snippets of those blocked pages, not a direct fetch, so treat it as
+  reasonably likely but not independently confirmed.
+- **The Pocketed materials row is flagged as unconfirmed-per-set** deliberately: the search result that
+  produced it didn't clearly state whether it was describing Leather Armor's Pocketed specifically or a
+  generic/example armor piece. Don't treat it as reliable.
+- **Perk gating**: before a past balance patch, Armorer rank 1 reportedly gated Deep Pocketed, Dense, and
+  Ultra-Light Build specifically (across all armor types, not just Leather), with reports suggesting armor
+  mods may no longer need a perk at all as of a later patch. Fextralife's current Armorer page still
+  describes rank 1 as unlocking "advanced armor mods (plans required)" without naming which ones — so the
+  true current-patch state of this table's "Perk required" column is unclear and worth confirming in-game
+  before relying on it.
+- **Weight class materials** (Light/Medium/Heavy) were not found documented anywhere reachable; the
+  percentage effects themselves came from Nukes & Dragons and general wiki-summary cross-checks, not a
+  primary wiki table.
