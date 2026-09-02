@@ -28,6 +28,14 @@ const { title, wide = false } = Astro.props;
 					<a href={`${import.meta.env.BASE_URL}map/`}>Map</a>
 				</nav>
 			</div>
+			<nav class="site-header-browse" aria-label="Browse by topic">
+				<span class="browse-label">Browse:</span>
+				<a class="tag" href={`${import.meta.env.BASE_URL}reference/#quests`}>Quests</a>
+				<a class="tag" href={`${import.meta.env.BASE_URL}materials/`}>Materials & scrapping</a>
+				<a class="tag" href={`${import.meta.env.BASE_URL}reference/#weapons`}>Weapons</a>
+				<a class="tag" href={`${import.meta.env.BASE_URL}reference/#armor`}>Armor</a>
+				<a class="tag" href={`${import.meta.env.BASE_URL}reference/#mods`}>Mods</a>
+			</nav>
 			<div class="site-header-search">
 				<Search
 					instance="site-search"

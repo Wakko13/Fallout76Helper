@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const all = await getCollection('faq');
+const materials = all
+	.filter((entry) => entry.id.endsWith('-farming'))
+	.sort((a, b) => a.data.title.localeCompare(b.data.title));
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Materials & Scrapping">
+	<h1>Materials & scrapping</h1>
+	<p class="meta">
+		Every craftable material's farming guide — {materials.length} in total. Each covers scrapping
+		sources, mining/ore routes, and workshop extractors where they exist.
+	</p>
+
+	<div class="compact-list">
+		{materials.map((entry) => (
+			<a class="compact-link" href={`${base}faq/${entry.id}/`}>
+				<span class="compact-link-title">{entry.data.title}</span>
+				{entry.data.summary && <span class="compact-link-summary">{entry.data.summary}</span>}
+			</a>
+		))}
+	</div>
+</Layout>

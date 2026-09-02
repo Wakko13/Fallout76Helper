@@ -9,22 +9,34 @@ for (const entry of entries) {
 	group.push(entry);
 	byCategory.set(entry.data.category, group);
 }
+const sortedCategories = [...byCategory.entries()].sort((a, b) => b[1].length - a[1].length);
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title="Reference">
 	<h1>Reference</h1>
 	<p class="meta">Game mechanics and data that don't change every session.</p>
 
-	{[...byCategory.entries()].map(([category, items]) => (
+	<nav class="jump-nav" aria-label="Jump to category">
+		{sortedCategories.map(([category, items]) => (
+			<a class="tag" href={`#${category}`}>{category.replace('-', ' ')} ({items.length})</a>
+		))}
+		<a class="tag" href={`${base}materials/`}>materials & scrapping</a>
+	</nav>
+
+	{sortedCategories.map(([category, items]) => (
 		<div class="category-group">
-			<h2>{category.replace('-', ' ')}</h2>
-			{items.map((entry) => (
-				<a class="entry-card" href={`${import.meta.env.BASE_URL}reference/${entry.id}/`}>
-					<h3>{entry.data.title}</h3>
-					{entry.data.summary && <p>{entry.data.summary}</p>}
-					<p class="meta">Verified {entry.data.verified.toDateString()}</p>
-				</a>
-			))}
+			<h2 id={category}>{category.replace('-', ' ')}</h2>
+			<div class="compact-list">
+				{items
+					.sort((a, b) => a.data.title.localeCompare(b.data.title))
+					.map((entry) => (
+						<a class="compact-link" href={`${base}reference/${entry.id}/`}>
+							<span class="compact-link-title">{entry.data.title}</span>
+							{entry.data.summary && <span class="compact-link-summary">{entry.data.summary}</span>}
+						</a>
+					))}
+			</div>
 		</div>
 	))}
 </Layout>
