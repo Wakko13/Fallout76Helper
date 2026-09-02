@@ -2,10 +2,16 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
+function resourceName(title: string) {
+	const match = title.match(/^What's the fastest way to farm (.+)\?$/i);
+	const name = match ? match[1] : title;
+	return name.charAt(0).toUpperCase() + name.slice(1);
+}
+
 const all = await getCollection('faq');
 const materials = all
 	.filter((entry) => entry.id.endsWith('-farming'))
-	.sort((a, b) => a.data.title.localeCompare(b.data.title));
+	.sort((a, b) => resourceName(a.data.title).localeCompare(resourceName(b.data.title)));
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -19,7 +25,7 @@ const base = import.meta.env.BASE_URL;
 	<div class="compact-list">
 		{materials.map((entry) => (
 			<a class="compact-link" href={`${base}faq/${entry.id}/`}>
-				<span class="compact-link-title">{entry.data.title}</span>
+				<span class="compact-link-title">{resourceName(entry.data.title)}</span>
 				{entry.data.summary && <span class="compact-link-summary">{entry.data.summary}</span>}
 			</a>
 		))}
