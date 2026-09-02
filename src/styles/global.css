@@ -203,6 +203,25 @@ a {
 	scroll-margin-top: 6.5rem;
 }
 
+.mod-family-group {
+	margin-top: 1.25rem;
+}
+
+.mod-family-group h3 {
+	margin: 0 0 0.4rem;
+	font-size: 0.95rem;
+	color: var(--muted);
+}
+
+.mod-family-group h3 a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.mod-family-group h3 a:hover {
+	color: var(--accent);
+}
+
 .jump-nav {
 	display: flex;
 	flex-wrap: wrap;

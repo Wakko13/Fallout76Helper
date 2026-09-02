@@ -11,6 +11,153 @@ for (const entry of entries) {
 }
 const sortedCategories = [...byCategory.entries()].sort((a, b) => b[1].length - a[1].length);
 const base = import.meta.env.BASE_URL;
+
+// Mod pages (category "mods") are one flat pool of 97 items — grouped here by which
+// weapon/armor family overview page each one belongs to, so a mod is found next to its
+// weapon/armor rather than buried alphabetically among unrelated items.
+const weaponArmorFamilies = [
+	{ slug: 'pistols-and-sidearms', label: 'Pistols & sidearms' },
+	{ slug: 'rifles-and-carbines', label: 'Rifles & carbines' },
+	{ slug: 'shotguns', label: 'Shotguns' },
+	{ slug: 'energy-weapons', label: 'Energy weapons' },
+	{ slug: 'heavy-weapons', label: 'Heavy weapons' },
+	{ slug: 'melee-weapons', label: 'Melee & unarmed weapons' },
+	{ slug: 'explosives-and-thrown', label: 'Explosives & thrown' },
+	{ slug: 'light-and-combat-armor-sets', label: 'Light & combat armor' },
+	{ slug: 'power-armor-sets', label: 'Power armor' },
+	{ slug: 'functional-attire', label: 'Functional attire' },
+];
+
+const modFamily: Record<string, string> = {
+	'10mm-pistol-mods': 'pistols-and-sidearms',
+	'10mm-submachine-gun-mods': 'pistols-and-sidearms',
+	'44-pistol-mods': 'pistols-and-sidearms',
+	'alien-blaster-mods': 'pistols-and-sidearms',
+	'black-powder-pistol-mods': 'pistols-and-sidearms',
+	'deliverer-mods': 'pistols-and-sidearms',
+	'enclave-plasma-pistol-mods': 'pistols-and-sidearms',
+	'flare-gun-mods': 'pistols-and-sidearms',
+	'gamma-gun-mods': 'pistols-and-sidearms',
+	'pipe-weapons-mods': 'pistols-and-sidearms',
+	'single-action-revolver-mods': 'pistols-and-sidearms',
+	'syringer-mods': 'pistols-and-sidearms',
+	'voice-of-set-mods': 'pistols-and-sidearms',
+	'zeta-gun-mods': 'pistols-and-sidearms',
+
+	'combat-rifle-mods': 'rifles-and-carbines',
+	'hunting-rifle-mods': 'rifles-and-carbines',
+	'handmade-rifle-mods': 'rifles-and-carbines',
+	'assault-rifle-mods': 'rifles-and-carbines',
+	'lever-action-rifle-mods': 'rifles-and-carbines',
+	'radium-rifle-mods': 'rifles-and-carbines',
+	'black-powder-rifle-mods': 'rifles-and-carbines',
+	'crossbow-mods': 'rifles-and-carbines',
+	'railway-rifle-mods': 'rifles-and-carbines',
+	'the-dragon-mods': 'rifles-and-carbines',
+	'marksmans-hardened-sniper-rifle-mods': 'rifles-and-carbines',
+
+	'combat-shotgun-mods': 'shotguns',
+	'double-barrel-shotgun-mods': 'shotguns',
+	'pump-action-shotgun-mods': 'shotguns',
+	'cold-shoulder-mods': 'shotguns',
+
+	'laser-rifle-mods': 'energy-weapons',
+	'ultracite-laser-rifle-mods': 'energy-weapons',
+	'plasma-rifle-mods': 'energy-weapons',
+	'gauss-rifle-mods': 'energy-weapons',
+	'gauss-pistol-mods': 'energy-weapons',
+	'gauss-shotgun-mods': 'energy-weapons',
+	'cryolator-mods': 'energy-weapons',
+	'gatling-laser-mods': 'energy-weapons',
+	'gatling-plasma-mods': 'energy-weapons',
+	'tesla-rifle-mods': 'energy-weapons',
+	'salvaged-assaultron-head-mods': 'energy-weapons',
+
+	'minigun-mods': 'heavy-weapons',
+	'gatling-gun-mods': 'heavy-weapons',
+	'fat-man-mods': 'heavy-weapons',
+	'missile-launcher-mods': 'heavy-weapons',
+	'auto-grenade-launcher-mods': 'heavy-weapons',
+	'broadsider-mods': 'heavy-weapons',
+	'm79-grenade-launcher-mods': 'heavy-weapons',
+	'flamer-mods': 'heavy-weapons',
+	'cremator-mods': 'heavy-weapons',
+	'50-cal-machine-gun-mods': 'heavy-weapons',
+	'light-machine-gun-mods': 'heavy-weapons',
+	'harpoon-gun-mods': 'heavy-weapons',
+	'gauss-minigun-mods': 'heavy-weapons',
+
+	'machete-mods': 'melee-weapons',
+	'baseball-bat-mods': 'melee-weapons',
+	'board-mods': 'melee-weapons',
+	'pole-hook-mods': 'melee-weapons',
+	'sledgehammer-mods': 'melee-weapons',
+	'super-sledge-mods': 'melee-weapons',
+	'knuckles-mods': 'melee-weapons',
+	'power-fist-mods': 'melee-weapons',
+	'deathclaw-gauntlet-mods': 'melee-weapons',
+	'shishkebab-mods': 'melee-weapons',
+	'death-tambo-mods': 'melee-weapons',
+
+	'frag-grenade-mods': 'explosives-and-thrown',
+	'plasma-grenade-mods': 'explosives-and-thrown',
+	'pulse-grenade-mods': 'explosives-and-thrown',
+	'cryo-grenade-mods': 'explosives-and-thrown',
+	'cryo-mine-mods': 'explosives-and-thrown',
+	'explosive-bait-mods': 'explosives-and-thrown',
+
+	'leather-armor-mods': 'light-and-combat-armor-sets',
+	'metal-armor-mods': 'light-and-combat-armor-sets',
+	'combat-armor-mods': 'light-and-combat-armor-sets',
+	'robot-armor-mods': 'light-and-combat-armor-sets',
+	'trapper-armor-mods': 'light-and-combat-armor-sets',
+	'marine-armor-mods': 'light-and-combat-armor-sets',
+	'secret-service-armor-mods': 'light-and-combat-armor-sets',
+
+	't-45-power-armor-mods': 'power-armor-sets',
+	't-51-power-armor-mods': 'power-armor-sets',
+	't-60-power-armor-mods': 'power-armor-sets',
+	'excavator-power-armor-mods': 'power-armor-sets',
+	'raider-power-armor-mods': 'power-armor-sets',
+	'ultracite-power-armor-mods': 'power-armor-sets',
+	'hellcat-power-armor-mods': 'power-armor-sets',
+	'union-power-armor-mods': 'power-armor-sets',
+	't-65-power-armor-mods': 'power-armor-sets',
+	'x-01-power-armor-mods': 'power-armor-sets',
+	'strangler-heart-power-armor-mods': 'power-armor-sets',
+	'vulcan-power-armor-mods': 'power-armor-sets',
+
+	'hazmat-suit-mods': 'functional-attire',
+	'chinese-stealth-armor-mods': 'functional-attire',
+	'cave-diving-suit-mods': 'functional-attire',
+	'diver-suit-mods': 'functional-attire',
+	'marine-wetsuit-mods': 'functional-attire',
+	'vault-76-jumpsuit-mods': 'functional-attire',
+	'vault-tec-jumpsuit-mods': 'functional-attire',
+	'cultists-garments-mods': 'functional-attire',
+};
+
+function groupModsByFamily(items: typeof entries) {
+	const byFamily = new Map<string, typeof entries>();
+	const other: typeof entries = [];
+	for (const item of items) {
+		const family = modFamily[item.id];
+		if (!family) {
+			other.push(item);
+			continue;
+		}
+		const group = byFamily.get(family) ?? [];
+		group.push(item);
+		byFamily.set(family, group);
+	}
+	const groups = weaponArmorFamilies
+		.map((family) => ({ ...family, items: (byFamily.get(family.slug) ?? []).sort((a, b) => a.data.title.localeCompare(b.data.title)) }))
+		.filter((group) => group.items.length > 0);
+	if (other.length > 0) {
+		groups.push({ slug: '', label: 'Other', items: other.sort((a, b) => a.data.title.localeCompare(b.data.title)) });
+	}
+	return groups;
+}
 ---
 
 <Layout title="Reference">
@@ -27,16 +174,34 @@ const base = import.meta.env.BASE_URL;
 	{sortedCategories.map(([category, items]) => (
 		<div class="category-group">
 			<h2 id={category}>{category.replace('-', ' ')}</h2>
-			<div class="compact-list">
-				{items
-					.sort((a, b) => a.data.title.localeCompare(b.data.title))
-					.map((entry) => (
-						<a class="compact-link" href={`${base}reference/${entry.id}/`}>
-							<span class="compact-link-title">{entry.data.title}</span>
-							{entry.data.summary && <span class="compact-link-summary">{entry.data.summary}</span>}
-						</a>
-					))}
-			</div>
+			{category === 'mods' ? (
+				groupModsByFamily(items).map((group) => (
+					<div class="mod-family-group">
+						<h3>
+							{group.slug ? <a href={`${base}reference/${group.slug}/`}>{group.label}</a> : group.label}
+						</h3>
+						<div class="compact-list">
+							{group.items.map((entry) => (
+								<a class="compact-link" href={`${base}reference/${entry.id}/`}>
+									<span class="compact-link-title">{entry.data.title}</span>
+									{entry.data.summary && <span class="compact-link-summary">{entry.data.summary}</span>}
+								</a>
+							))}
+						</div>
+					</div>
+				))
+			) : (
+				<div class="compact-list">
+					{items
+						.sort((a, b) => a.data.title.localeCompare(b.data.title))
+						.map((entry) => (
+							<a class="compact-link" href={`${base}reference/${entry.id}/`}>
+								<span class="compact-link-title">{entry.data.title}</span>
+								{entry.data.summary && <span class="compact-link-summary">{entry.data.summary}</span>}
+							</a>
+						))}
+				</div>
+			)}
 		</div>
 	))}
 </Layout>
